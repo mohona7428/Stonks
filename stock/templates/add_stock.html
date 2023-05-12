@@ -1,0 +1,155 @@
+{% extends 'base2.html'%} {%block title %}Add Stock{%endblock%}
+{%block css %}
+
+.btn:hover{
+background: transparent;
+border: 2px solid #f9004d;
+cursor: pointer;
+}
+
+}
+#daba:hover{
+color: red;
+cursor: pointer;
+}
+
+.resultrow {
+display: flex;
+padding:20px;
+{% comment %} margin-left:-5px;
+margin-right:-5px; {% endcomment %}
+}
+
+.resultcolumn {
+    flex: 50%;
+    {% comment %} padding: 5px; {% endcomment %}
+  }
+
+{%endblock%}
+{%block body %}
+<br>
+<h2 style="color: yellow; text-align:center;">Add Stocks</h2>
+<br>
+
+<form action="{% url 'add_stock' %}" class="form-inline  my-2 my-lg-0" method="POST"
+    style=" text-align:center; width:400px; margin-left:500px;">
+    <!--CSRF:Cross Site Request Forgery-->
+    {% csrf_token %}
+    <input class="form-control mr-sm-1" type="search" placeholder="Add Ticker to Portfolio" aria-label="Search"
+        name="ticker" width="10px"><br>
+    <button class="btn btn-success my-2 my-sm-0" type="submit">Add Stock</button>
+</form>
+<br>
+
+
+
+<div class="resultrow">
+    <div class="resultcolumn">
+        <table class="table table-bordered">
+            <tr style="background:black;color:yellow; width:300px;">
+                <th scope="col">Company Name</th>
+            </tr>
+            <tr>
+                {% for i in companyName %}
+                <td style="color:white;"><strong>{{ i }}</strong></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div class="resultcolumn">
+        <table class="table table-bordered">
+            <tr style="background:black;color:yellow;">
+                <th scope="col">Current Price</th>
+            </tr>
+            <tr>
+                {% for i in lastPrice %}
+                <td style="color:white;"><strong>{{ i }}</strong></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+
+    <div class="resultcolumn">
+        <table class="table table-bordered">
+            <tr style="background:black;color:yellow;">
+                <th scope="col">Day High</th>
+            </tr>
+            <tr>
+                {% for i in dayHigh %}
+                <td style="color:white;"><strong>{{ i }}</strong></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+
+    <div class="resultcolumn">
+        <table class="table table-bordered">
+            <tr style="background:black;color:yellow;">
+                <th scope="col">Day Low</th>
+            </tr>
+            <tr>
+                {% for i in dayLow %}
+                <td style="color:white;"><strong>{{ i }}</strong></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div class="resultcolumn">
+        <table class="table table-bordered">
+            <tr style="background:black;color:yellow;">
+                <th scope="col">Previouas Close</th>
+            </tr>
+            <tr>
+                {% for i in previousClose %}
+                <td style="color:white;"><strong>{{ i }}</strong></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div class="resultcolumn">
+        <table class="table table-bordered">
+            <tr style="background:black;color:yellow;">
+                <th scope="col">% Change</th>
+            </tr>
+            <tr>
+                {% for i in pChange %}
+                <td style="color:white;"><strong>{{ i }}</strong></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div class="resultcolumn">
+        <table class="table table-bordered">
+            <tr style="background:black;color:yellow;">
+                <th scope="col">Change</th>
+            </tr>
+            <tr>
+                {% for i in change %}
+                <td style="color:white;"><strong>{{ i }}</strong></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+
+    <div class="resultcolumn">
+        <table class="table table-bordered">
+            <tr style="background:black;color:yellow;">
+                <th scope="col">Previouas Close</th>
+            </tr>
+            <tr style="color:white;">
+                {% for i in data %}
+                <td style="color:white;"> <a href="{% url 'delete' i.id %}" id="daba">Delete Stock</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</div>
+{% endblock %}

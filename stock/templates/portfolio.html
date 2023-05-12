@@ -1,0 +1,293 @@
+{% extends 'base2.html'%} {%block title %}Add Stock{%endblock%}
+{%block css %}
+
+.btn:hover{
+background: transparent;
+border: 2px solid #f9004d;
+cursor: pointer;
+}
+
+}
+#daba:hover{
+color: red;
+cursor: pointer;
+}
+
+.resultrow {
+display: flex;
+padding:20px;
+{% comment %} margin-left:-5px;
+margin-right:-5px; {% endcomment %}
+}
+
+.resultcolumn {
+    flex: 50%;
+    {% comment %} padding: 5px; {% endcomment %}
+  }
+
+{%endblock%}
+{%block body %}
+<br>
+<h2 style="color: yellow; text-align:center;">Portfolio</h2>
+<br>
+
+
+<div class="resultrow">
+    <div class="resultcolumn">
+        <table class="table table-bordered" style="width: 200px;" id="stocks">
+            <tr style="background:black;color:white;">
+                <th scope="col">Stock Name</th>
+
+            </tr>
+            <tr style="color:white;">
+                {% for item in companyname %}
+                <td style="color:black;"><a href="/prices2/{{item}}" style="color:white;"><strong>{{ item }}</strong></a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div class="resultcolumn">
+        <table class="table table-bordered">
+            <tr style="background:black;color:white;">
+                <th scope="col">Quantity</th>
+
+            </tr>
+            <tr style="color:black;">
+                {% for item in quantity %}
+                <td style="color:white;">{{ item }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+
+    <div class="resultcolumn">
+        <table class="table table-bordered">
+            <tr style="background:black;color:white;">
+                <th scope="col">Invested Value</th>
+
+            </tr>
+            <tr style="color:white;">
+                {% for item in investedvalue %}
+                <td style="color:white;">{{ item|floatformat:2  }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+
+    <div class="resultcolumn">
+        <table class="table table-bordered">
+            <tr style="background:black;color:white;">
+                <th scope="col">Market Price</th>
+
+            </tr>
+            <tr style="color:white;">
+                {% for item in marketprice %}
+                <td style="color:white;">{{ item |floatformat:2 }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div class="resultcolumn">
+        <table class="table table-bordered" >
+            <tr style="background:black;color:white;">
+                <th scope="col">Current Value</th>
+
+            </tr>
+            <tr style="color:white;">
+                {% for item in currentvalue %}
+                <td style="color:white;">{{ item |floatformat:2 }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+
+    <div class="resultcolumn">
+        <table class="table table-bordered">
+            <tr style="background:black;color:white;">
+                <th scope="col">% Change</th>
+
+            </tr>
+            <tr style="color:white;">
+                {% for item in percent %}
+                {% if item > 0 %}
+                <td style="color:green;">{{item}}%</td>
+                {% else %}
+                <td style="color:red;">{{item}}%</td>
+                {% endif%}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div class="resultcolumn">
+        <table class="table table-bordered">
+            <tr style="background:black;color:white;">
+                <th scope="col">Profit Loss</th>
+
+            </tr>
+            <tr style="color:white;">
+                {% for item in profit %}
+                  {% if item > 0 %}
+                <td style="color:green;">₹ {{item|floatformat:2 }}</td>
+                {% else %}
+                <td style="color:red;">₹ {{item|floatformat:2 }}</td>
+                {% endif%}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="resultcolumn">
+        <table class="table table-bordered">
+            <tr style="background:black;color:white;">
+                <th scope="col">Sell</th>
+
+            </tr>
+            <tr style="color:white;">
+                {% for item in data %}
+                <td style="color:black;"><a href="/sell/{{item.ticker}}" style=" ">Sell</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</div>
+<br>
+<div style="height: 400px;  margin-bottom:20px; display: flex;justify-content: center;">
+    <canvas id="bar-chart" style="padding-left:20px,padding-right:20px;"></canvas>
+    <canvas id="doughnut-chart"></canvas>
+</div>
+
+<div style="display: flex;">
+    <div>
+        <h5 style="margin-left:350px; color: white;">Investment in 2023</h5>
+    </div>
+    <div>
+        <h5 style="margin-left:400px; color: white;">Sector Wise Investment</h5>
+    </div>
+</div>
+<br>
+<br>
+
+<div style="height: 300px;  margin-bottom:20px; display: flex;justify-content: center;">
+    <canvas id="bar-chart-grouped" style="margin-right:50px;"></canvas>
+    
+    <canvas id="bar-chart-grouped1"></canvas>
+</div>
+
+<div style="display: flex;">
+    <div>
+        <h5 style="margin-left:250px; color: white;">Invested vs Current</h5>
+    </div>
+    <div>
+        <h5 style="margin-left:350px; color: white;">Buy Price vs Sell price</h5>
+    </div>
+</div>
+<br>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    new Chart(document.getElementById("doughnut-chart"), {
+        type: 'doughnut',
+        data: {
+          labels: {{ sector|safe }},
+          datasets: [{
+            label: ["Invested Amount"],
+            data: {{ investedvalue }}
+          }]
+        },
+        options: {
+          title: {
+            display: true,
+            text: 'Sectorwise Investment'
+          }
+        }
+    });
+</script>
+
+
+
+<script>
+new Chart(document.getElementById("bar-chart"), {
+type: 'bar',
+data: {
+  labels: ['Jan', 'Feb', 'March', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  datasets: [
+    {
+      label: "Investment",
+      backgroundColor: ["#8e5ea2"],
+      data: {{bardata}}
+    }
+  ]
+},
+options: {
+  legend: { display: true },
+  title: {
+    display: true,
+    text: 'Investment in 2023'
+  }
+}
+});
+</script>
+
+<script>
+new Chart(document.getElementById("bar-chart-grouped"), {
+type: 'bar',
+data: {
+  labels: [{% for i in data %} '{{i.ticker}}', {% endfor %}],
+  datasets: [
+    {
+      label: "Invested",
+      backgroundColor: "#3e95cd",
+      data: {{investedvalue}}
+    }, {
+      label: "Current",
+      backgroundColor: "#8e5ea2",
+      data: {{currentvalue}}
+    }
+  ]
+},
+options: {
+  title: {
+    display: true,
+    text: 'Population growth (millions)'
+  },
+   
+}
+});
+
+new Chart(document.getElementById("bar-chart-grouped1"), {
+type: 'bar',
+data: {
+  labels: [{% for i in selldata %} '{{i.ticker}}', {% endfor %}],
+  datasets: [
+    {
+      label: "Buy Price",
+      backgroundColor: "#3e95cd",
+      data: {{buytotal}}
+    }, {
+      label: "Sell Price",
+      backgroundColor: "#8e5ea2",
+      data: {{selltotal}}
+    }
+  ]
+},
+options: {
+  title: {
+    display: true,
+    text: 'Population growth (millions)'
+  },
+   
+}
+});
+</script>
+
+<script>
+const stock = [{% for i in data %} '{{i.ticker}}', {% endfor %}]
+</script>
+
+{% endblock %}
