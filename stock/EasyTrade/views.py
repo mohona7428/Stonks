@@ -974,7 +974,7 @@ def trade(request):
             #     "Hello!! "+name+"\nyou have Buyed "+ticker +
             #     " with "+quan+" quantity at price " +
             #     sprice+"\nTotal Quantity: "+str(tq),
-            #     'codinggeeks0@gmail.com',
+            #     'mohonab16@gmail.com',
             #     [email],
             #     fail_silently=False,
             # )
