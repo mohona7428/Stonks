@@ -69,6 +69,31 @@ table,td,th{
 
 {%endblock%}
 {%block body%}
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        p {
+            color: white;
+        }
+        ol {
+            color: white;
+        }
+        h2 {
+            color: yellow;
+        }
+        li {
+            color: white;
+        }
+        ul {
+            color: white;
+        }
+        h3 {
+            color: #A0D8B3;
+        }
+    </style>
+</head>
+<body>
     <h1 style="margin-top: 15px; margin-bottom:30px;text-align:center; color: yellow; font-family: Times New Roman, Times, serif; font-weight: bold;">Chart Types</h1>
     <h2>3.1– Overview</h2>
 <p>Having recognized that the Open (O), high (H), low (L), and close (C) serves as the best way to summarize the trading action for the given period, we need a charting technique that displays this information in the most comprehensible way. If not for a good charting technique, charts can get quite complex. Each trading day has four data points, ’ i.e. the OHLC. If we are looking at a 10-day chart, we need to visualize 40 data points (1-day x 4 data points per day). So you can imagine how complex it would be to visualize 6 months or a year’s data.</p>
@@ -258,4 +283,5 @@ Close = 435</p>
 <p>The data can either be information or noise. As a trader, you need to filter information from noise. For instance, a long term investor is better off looking at weekly or monthly charts as this would provide information. While on the other hand an intraday trader executing 1 or 2 trades per day is better off looking at the end of the day (EOD) or at best 15 mins charts. Likewise, for a high-frequency trader, 1-minute charts can convey a lot of information.</p>
 <p>So based on your stance as a trader, you need to choose a time frame. This is extremely crucial for your trading success because a successful trader looks for information and discards the noise.</p>
 <hr />
+</body></html>
 {%endblock%}
