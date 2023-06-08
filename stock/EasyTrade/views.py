@@ -229,14 +229,17 @@ def add_stock(request):
         for i in data:
             sname = i.ticker
             data_nse = nse_eq(sname)
-            companyName.append(data_nse['info']['symbol'])
-            lastPrice.append(data_nse["priceInfo"]["lastPrice"])
-            dayHigh.append(data_nse["priceInfo"]["intraDayHighLow"]["max"])
-            dayLow.append(data_nse["priceInfo"]["intraDayHighLow"]["min"])
-            previousClose.append(data_nse["priceInfo"]["previousClose"])
-            open.append(data_nse["priceInfo"]["open"])
-            pChange.append(round(data_nse["priceInfo"]["pChange"], 2))
-            change.append(round(data_nse["priceInfo"]["change"], 2))
+            if 'info' in data_nse:
+                companyName.append(data_nse['info']['symbol'])
+                lastPrice.append(data_nse["priceInfo"]["lastPrice"])
+                dayHigh.append(data_nse["priceInfo"]["intraDayHighLow"]["max"])
+                dayLow.append(data_nse["priceInfo"]["intraDayHighLow"]["min"])
+                previousClose.append(data_nse["priceInfo"]["previousClose"])
+                open.append(data_nse["priceInfo"]["open"])
+                pChange.append(round(data_nse["priceInfo"]["pChange"], 2))
+                change.append(round(data_nse["priceInfo"]["change"], 2))
+            else:
+                continue
 
         context = {
             'companyName': companyName,
