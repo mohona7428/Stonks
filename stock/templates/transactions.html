@@ -193,7 +193,7 @@ td{
  
     <form action="/csv_month" method="POST">
         {% csrf_token %}
-    <button class='btn1' type="submit" class="msgBtn" style="background: #1b1658;border: 2px solid white; border-radius: 10px; font-weight: bold; color: white; width: 200px; height: 60px; margin-top:40px; float:right; margin-right:20px">Download Summary</button><br>
+    <!-- <button class='btn1' type="submit" class="msgBtn" style="background: #1b1658;border: 2px solid white; border-radius: 10px; font-weight: bold; color: white; width: 200px; height: 60px; margin-top:40px; float:right; margin-right:20px">Download Summary</button><br> -->
 </form>
     {% if total > 0%}
     <h2 style="text-align:center; color: #03fb03; margin-left:200px;">Profit:<span style="color:#03fb03">{{total}}</span></h2>
