@@ -149,18 +149,18 @@
 
         </div>
         <form action="{% url 'finalSell' %}" class="form-inline  my-2 my-lg-0" method="POST"
-            style=" text-align:center; width:400px; margin-left:480px;">
+            style=" text-align:center; width:400px; margin-left:480px; display: flex; flex-direction: column;">
             <!--CSRF:Cross Site Request Forgery-->
             {% csrf_token %}
             {% for item in data %}
             <input type="hidden" id="sname" name="sname" value="{{item.ticker}}">
             <input type="hidden" id="sname" name="sprice" value="{{item.buyPrice}}">
-            <input style="margin-left: 160px;"type="text" id="sname" name="quan" value="{{item.quantity}}">
+            <input style="margin-left: 130px; margin-bottom: 20px; width: 150px;"type="text" id="sname" name="quan" value="{{item.quantity}}">
             {% endfor %}
             {% for item in cp %}
             <input type="hidden" id="sname" name="lprice" value="{{item}}">
             {% endfor %}
-            <button style="margin-left:160px; margin-top: 100px;" class="btn btn-danger my-2 my-sm-0" type="submit"><b>Sell</b></button>
+            <button style="margin-left:130px; margin-top: 120px; width: 150px;" class="btn btn-danger my-2 my-sm-0" type="submit"><b>Sell</b></button>
         </form>
 
 
