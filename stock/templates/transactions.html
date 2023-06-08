@@ -195,16 +195,8 @@ td{
         {% csrf_token %}
     <!-- <button class='btn1' type="submit" class="msgBtn" style="background: #1b1658;border: 2px solid white; border-radius: 10px; font-weight: bold; color: white; width: 200px; height: 60px; margin-top:40px; float:right; margin-right:20px">Download Summary</button><br> -->
 </form>
-    {% if total > 0%}
-    <h2 style="text-align:center; color: #03fb03; margin-left:200px;">Profit:<span style="color:#03fb03">{{total}}</span></h2>
-    {% else %}
-    <h2 style="text-align:center;color: #03fb03;margin-left:200px;">Profit : 0</h2>
-    {%endif%}
-    {% if total >= 0%}
-    <h2 style="text-align:center; color: red;margin-left:200px;">Loss : 0 </h2>
-    {% else %}
-    <h2 style="text-align:center; color: redmargin-left:200px;;">Loss :<span style="color:red"> {{total}}</span></h2>
-    {%endif%}
+    <h2 style="text-align:center; color: #03fb03;">Profit : <span style="color:#03fb03">{{total}}</span></h2>
+    <h2 style="text-align:center; color: red;">Loss :<span style="color:red"> {{total}}</span></h2>
     <hr style="color:#f3f704; width:1020px;margin-left:200px;height:5px;">
     <div class="wrapper">
         
