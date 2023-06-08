@@ -59,8 +59,9 @@ text-shadow: 0 0 10px #289aab;
         margin-left: 20px; max-width:500px;border-radius:20px;padding:10px; font-style: italic;">
                 <marquee>
                     {%for i in loser|slice:":2" %}
-                    <h5 style="color:red;"><i class="fa fa-arrow-circle-down" style="font-size:20px;color:red"></i> 
-                        {{i.securityID }} | Price: {{ i.LPT }}₹ | Change: {{ i.change }}₹ | % Change: {{i.pChange}}%</h5>
+                    <h5 style="color:red;"><i class="fa fa-arrow-circle-down"
+                         style="font-size:20px;color:red"></i> 
+                        {{i.securityID }} | Price: {{ i.LTP }}₹ | Change: {{ i.change }}₹ | % Change: {{i.pChange}}%</h5>
                     {% endfor %}
                 </marquee>
             </div>
