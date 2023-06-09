@@ -447,6 +447,12 @@ def handelSignup(request):
         pass1 = request.POST['pass1']
         pass2 = request.POST['pass2']
 
+        # check for errorneous input
+        if len(username) > 25:
+            messages.error(
+                request, " Your user name must be under 25 characters")
+            return redirect('index')
+          
         if not username.isalnum():
             messages.error(
                 request, " User name should only contain letters and numbers")
