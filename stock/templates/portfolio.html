@@ -44,7 +44,6 @@ margin-right:-5px; {% endcomment %}
                 <th scope="col">Current Value</th>
                 <th scope="col">% Change</th>
                 <th scope="col">Profit Loss</th>
-                <th scope="col">Sell</th>
             </tr>
           </thead>
         
@@ -100,12 +99,6 @@ margin-right:-5px; {% endcomment %}
                       <p style="color:red;">₹ {{item|floatformat:2 }}</p>
                       {% endif%}
                       {% endfor %}
-                  </td>
-
-                  <td>
-                    {% for item in data %}
-                    <p><a href="/sell/{{item.ticker}}">Sell</a></p>
-                    {% endfor %}
                   </td>
           
               </tr>
