@@ -217,7 +217,6 @@ def add_stock(request):
         stock.uname = username
         stock.ticker = ticker
         stock.save()
-        messages.success(request, ("Stock has been added!"))
         return redirect('add_stock')
 
     else:
@@ -260,7 +259,6 @@ def add_stock(request):
 def delete(request, stock_id):
     item = Stock.objects.get(pk=stock_id)
     item.delete()
-    messages.success(request, ("Stock has been deleted!"))
     return redirect(delete_stock)
 
 
@@ -454,7 +452,7 @@ def handelSignup(request):
             messages.error(
                 request, " Your user name must be under 25 characters")
             return redirect('index')
-
+          
         if not username.isalnum():
             messages.error(
                 request, " User name should only contain letters and numbers")

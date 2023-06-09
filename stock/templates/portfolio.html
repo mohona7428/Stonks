@@ -34,131 +34,90 @@ margin-right:-5px; {% endcomment %}
 
 <div class="resultrow">
     <div class="resultcolumn">
-        <table class="table table-bordered" style="width: 200px;" id="stocks">
+        <table class="table table-bordered" style="width: 100%;" id="stocks">
+          <thead>
             <tr style="background:black;color:white;">
                 <th scope="col">Stock Name</th>
-
-            </tr>
-            <tr style="color:white;">
-                {% for item in companyname %}
-                <td style="color:black;"><a href="/prices2/{{item}}" style="color:white;"><strong>{{ item }}</strong></a></td>
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
-
-    <div class="resultcolumn">
-        <table class="table table-bordered">
-            <tr style="background:black;color:white;">
                 <th scope="col">Quantity</th>
-
-            </tr>
-            <tr style="color:black;">
-                {% for item in quantity %}
-                <td style="color:white;">{{ item }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
-
-
-    <div class="resultcolumn">
-        <table class="table table-bordered">
-            <tr style="background:black;color:white;">
                 <th scope="col">Invested Value</th>
-
-            </tr>
-            <tr style="color:white;">
-                {% for item in investedvalue %}
-                <td style="color:white;">{{ item|floatformat:2  }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
-
-
-    <div class="resultcolumn">
-        <table class="table table-bordered">
-            <tr style="background:black;color:white;">
                 <th scope="col">Market Price</th>
-
-            </tr>
-            <tr style="color:white;">
-                {% for item in marketprice %}
-                <td style="color:white;">{{ item |floatformat:2 }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
-
-    <div class="resultcolumn">
-        <table class="table table-bordered" >
-            <tr style="background:black;color:white;">
                 <th scope="col">Current Value</th>
-
-            </tr>
-            <tr style="color:white;">
-                {% for item in currentvalue %}
-                <td style="color:white;">{{ item |floatformat:2 }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-
-    </div>
-
-    <div class="resultcolumn">
-        <table class="table table-bordered">
-            <tr style="background:black;color:white;">
                 <th scope="col">% Change</th>
-
-            </tr>
-            <tr style="color:white;">
-                {% for item in percent %}
-                {% if item > 0 %}
-                <td style="color:green;">{{item}}%</td>
-                {% else %}
-                <td style="color:red;">{{item}}%</td>
-                {% endif%}
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
-
-    <div class="resultcolumn">
-        <table class="table table-bordered">
-            <tr style="background:black;color:white;">
                 <th scope="col">Profit Loss</th>
-
-            </tr>
-            <tr style="color:white;">
-                {% for item in profit %}
-                  {% if item > 0 %}
-                <td style="color:green;">₹ {{item|floatformat:2 }}</td>
-                {% else %}
-                <td style="color:red;">₹ {{item|floatformat:2 }}</td>
-                {% endif%}
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
-    <div class="resultcolumn">
-        <table class="table table-bordered">
-            <tr style="background:black;color:white;">
                 <th scope="col">Sell</th>
+            </tr>
+          </thead>
+        
+          <tbody>
+              <tr style="color:white;">
+                  
+                  <td>
+                      {% for item in companyname %}
+                      <p><strong>{{ item }}</strong></p>
+                      {% endfor %}
+                  </td>
+                  
+                  
+                  <td>
+                      {% for item in quantity %}
+                      <p>{{ item }}</p>
+                      {% endfor %}
+                  </td>
 
-            </tr>
-            <tr style="color:white;">
-                {% for item in data %}
-                <td style="color:black;"><a href="/sell/{{item.ticker}}" style=" ">Sell</a></td>
-            </tr>
-            {% endfor %}
-        </table>
+                  <td>
+                      {% for item in investedvalue %}
+                      <p>{{ item|floatformat:2  }}</p>
+                      {% endfor %}
+                  </td>
+
+                  <td>
+                      {% for item in marketprice %}
+                      <p>{{ item |floatformat:2 }}</p>
+                      {% endfor %}
+                  </td>
+
+                  <td>
+                      {% for item in currentvalue %}
+                      <p>{{ item |floatformat:2 }}</p>
+                      {% endfor %}
+                  </td>
+
+                  <td>
+                      {% for item in percent %}
+                      {% if item > 0 %}
+                      <p style="color:green;">{{item}}%</p>
+                      {% else %}
+                      <p style="color:red;">{{item}}%</p>
+                      {% endif%}
+                      {% endfor %}
+                  </td>
+
+                  <td>
+                      {% for item in profit %}
+                      {% if item > 0 %}
+                      <p style="color:green;">₹ {{item|floatformat:2 }}</p>
+                      {% else %}
+                      <p style="color:red;">₹ {{item|floatformat:2 }}</p>
+                      {% endif%}
+                      {% endfor %}
+                  </td>
+
+                  <td>
+                    {% for item in data %}
+                    <p><a href="/sell/{{item.ticker}}">Sell</a></p>
+                    {% endfor %}
+                  </td>
+          
+              </tr>
+            </tbody>
+          </table>
+      </div>
     </div>
 
 </div>
 <br>
 <div style="height: 400px;  margin-bottom:20px; display: flex;justify-content: center;">
-    <canvas id="bar-chart" style="padding-left:20px,padding-right:20px;"></canvas>
+    <canvas id="bar-chart" style="padding-left:20px;padding-right:20px;"></canvas>
     <canvas id="doughnut-chart"></canvas>
 </div>
 
@@ -289,5 +248,4 @@ options: {
 <script>
 const stock = [{% for i in data %} '{{i.ticker}}', {% endfor %}]
 </script>
-
-{% endblock %}
+{%endblock%}

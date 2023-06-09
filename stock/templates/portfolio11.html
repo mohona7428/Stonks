@@ -249,111 +249,85 @@ td{
     <div class="wrapper">
         <div class="sec">
 
-            <table class="table table-bordered" style="width: 200px;" id="stocks">
-                <tr style="background:black;color:white;">
-                    <th scope="col">Stock Name</th>
+            <table class="table table-bordered" id="stocks">
+                <thead>
+                    <tr style="background:black;color:white;">
+                        <th scope="col">Stock Name</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Invested Value</th>
+                        <th scope="col">Market Price</th>
+                        <th scope="col">Current Value</th>
+                        <th scope="col">% Change</th>
+                        <th scope="col">Profit Loss</th>
+                        <th scope="col">Sell</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    <tr style="color:white;">
+                        
+                        <td>
+                            {% for item in companyname %}
+                            <p><strong>{{ item }}</strong></p>
+                            {% endfor %}
+                        </td>
+                        
+                        
+                        <td>
+                            {% for item in quantity %}
+                            <p>{{ item }}</p>
+                            {% endfor %}
+                        </td>
 
-                </tr>
-                <tr style="color:white;">
-                    {% for item in companyname %}
-                    <td style="color:black;"><a href="/prices2/{{item}}" style="color:white;"><strong>{{ item }}</strong></a></td>
-                </tr>
-                {% endfor %}
+                        <td>
+                            {% for item in investedvalue %}
+                            <p>{{ item|floatformat:2  }}</p>
+                            {% endfor %}
+                        </td>
+
+                        <td>
+                            {% for item in marketprice %}
+                            <p>{{ item |floatformat:2 }}</p>
+                            {% endfor %}
+                        </td>
+
+                        <td>
+                            {% for item in currentvalue %}
+                            <p>{{ item |floatformat:2 }}</p>
+                            {% endfor %}
+                        </td>
+
+                        <td>
+                            {% for item in percent %}
+                            {% if item > 0 %}
+                            <p style="color:green;">{{item}}%</p>
+                            {% else %}
+                            <p style="color:red;">{{item}}%</p>
+                            {% endif%}
+                            {% endfor %}
+                        </td>
+
+                        <td>
+                            {% for item in profit %}
+                            {% if item > 0 %}
+                            <p style="color:green;">₹ {{item|floatformat:2 }}</p>
+                            {% else %}
+                            <p style="color:red;">₹ {{item|floatformat:2 }}</p>
+                            {% endif%}
+                            {% endfor %}
+                        </td>
+
+                        <!-- <td>
+                            {% for item in data %}
+                            <p style="color:black;"><a href="/sell/{{item.ticker}}">Sell</a></td>
+                            {% endfor %}
+                        </td> -->
+                
+                    </tr>
+                </tbody>
+                
             </table>
-            
-            <table class="table table-bordered" style="width: 200%;">
-                <tr style="background:black;color:white;">
-                    <th scope="col">Quantity</th>
-
-                </tr>
-                <tr style="color:black;">
-                    {% for item in quantity %}
-                    <td style="color:white;">{{ item }}</td>
-                </tr>
-                {% endfor %}
-            </table>
-
-            <table class="table table-bordered" style="width: 210%;">
-                <tr style="background:black;color:white;">
-                    <th scope="col">Invested Value</th>
-
-                </tr>
-                <tr style="color:white;">
-                    {% for item in investedvalue %}
-                    <td style="color:white;">{{ item|floatformat:2  }}</td>
-                </tr>
-                {% endfor %}
-            </table>
-
-
-            <table class="table table-bordered" style="width: 200%;">
-                <tr style="background:black;color:white;">
-                    <th scope="col">Market Price</th>
-
-                </tr>
-                <tr style="color:white;">
-                    {% for item in marketprice %}
-                    <td style="color:white;">{{ item |floatformat:2 }}</td>
-                </tr>
-                {% endfor %}
-            </table>
-
-            <table class="table table-bordered" style="width: 200%;">
-                <tr style="background:black;color:white;">
-                    <th scope="col">Current Value</th>
-
-                </tr>
-                <tr style="color:white;">
-                    {% for item in currentvalue %}
-                    <td style="color:white;">{{ item |floatformat:2 }}</td>
-                </tr>
-                {% endfor %}
-            </table>
-
-
-            <table class="table table-bordered" style="width: 200%;">
-                <tr style="background:black;color:white;">
-                    <th scope="col">% Change</th>
-
-                </tr>
-                <tr style="color:white;">
-                    {% for item in percent %}
-                    {% if item > 0 %}
-                    <td style="color:green;">{{item}}%</td>
-                    {% else %}
-                    <td style="color:red;">{{item}}%</td>
-                    {% endif%}
-                </tr>
-                {% endfor %}
-            </table>
-
-            <table class="table table-bordered" style="width: 200%;">
-                <tr style="background:black;color:white;">
-                    <th scope="col">Profit Loss</th>
-
-                </tr>
-                <tr style="color:white;">
-                    {% for item in profit %}
-                      {% if item > 0 %}
-                    <td style="color:green;">₹ {{item|floatformat:2 }}</td>
-                    {% else %}
-                    <td style="color:red;">₹ {{item|floatformat:2 }}</td>
-                    {% endif%}
-                </tr>
-                {% endfor %}
-            </table>
-
-            <table class="table table-bordered" style="width: 200%;">
-                <tr style="background:black;color:white;">
-                    <th scope="col">Sell</th>
-
-                </tr>
-                <tr style="color:white;">
-                    {% for item in data %}
-                    <td style="color:black;"><a href="/sell/{{item.ticker}}" style=" ">Sell</a></td>
-                </tr>
-                {% endfor %}
-            </table>
+        
         </div>
     </div>
     <br>
